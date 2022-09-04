@@ -1,9 +1,15 @@
+// npm-modules
 const express = require('express');
 const mongoose = require('mongoose');
 
+// modules
+const { routes } = require('./routes');
+
+// params
 const { PORT = 3000 } = process.env;
 const DATABASE_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb';
 
+// initializing
 const app = express();
 
 mongoose
@@ -16,6 +22,12 @@ mongoose
     console.error(err);
   });
 
+// middlewares
+app.use(routes);
+
+// error handlers
+
+// app starting
 app.listen(PORT, () => {
   console.log(`App started on port ${PORT}...`);
 });
