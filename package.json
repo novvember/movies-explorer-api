@@ -1,0 +1,31 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Приложение Movies Explorer (дипломный проект Я.Практикума): бэкенд-часть с API-сервером",
+  "main": "app.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novvember/movies-explorer-api.git"
+  },
+  "keywords": [
+    "yandex-practicum",
+    "express-js",
+    "rest-api"
+  ],
+  "author": "novvember",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novvember/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/novvember/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
