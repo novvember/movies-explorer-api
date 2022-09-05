@@ -1,5 +1,8 @@
+const { mongoose } = require('mongoose');
+
 const { Movie } = require('../../models/movie');
 const { NotFoundError, ForbiddenError } = require('../../errors');
+const { handleMongooseError } = require('../../utils/handleMongooseError');
 
 async function deleteMovie(req, res, next) {
   try {
@@ -22,10 +25,11 @@ async function deleteMovie(req, res, next) {
 
     res.send(movie);
   } catch (err) {
-    if (err.name === 'CastError') {
-      next(new NotFoundError('Фильм не найден'));
+    if (err instanceof mongoose.Error) {
+      next(handleMongooseError(err));
       return;
     }
+
     next(err);
   }
 }
