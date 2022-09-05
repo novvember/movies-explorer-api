@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // modules
 const { routes } = require('./routes');
+const { errorHandler } = require('./middlewares/errorHandler');
 
 // params
 const { PORT = 3000 } = process.env;
@@ -26,6 +27,7 @@ mongoose
 app.use(routes);
 
 // error handlers
+app.use(errorHandler);
 
 // app starting
 app.listen(PORT, () => {
