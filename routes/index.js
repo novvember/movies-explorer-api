@@ -1,17 +1,17 @@
 const express = require('express');
-// const { celebrate, Joi } = require('celebrate');
 
 const { movies } = require('./movies');
 const { users } = require('./users');
 const { NotFoundError } = require('../errors');
 const { auth } = require('../middlewares/auth');
 const { createUser, login } = require('../controllers/users');
+const { userInfoValidator } = require('../utils/validators');
 
 const routes = express.Router();
 
 routes.all('*', express.json());
 
-routes.post('/signup', createUser);
+routes.post('/signup', userInfoValidator, createUser);
 
 routes.post('/signin', login);
 

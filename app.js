@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const { errors } = require('celebrate');
 
 // modules
 const { routes } = require('./routes');
@@ -27,6 +28,7 @@ mongoose
 app.use(routes);
 
 // error handlers
+app.use(errors());
 app.use(errorHandler);
 
 // app starting
