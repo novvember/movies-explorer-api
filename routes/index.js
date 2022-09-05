@@ -5,12 +5,13 @@ const { movies } = require('./movies');
 const { users } = require('./users');
 const { NotFoundError } = require('../errors');
 const { auth } = require('../middlewares/auth');
+const { createUser } = require('../controllers/users');
 
 const routes = express.Router();
 
 routes.all('*', express.json());
 
-// routes.post('/signup', );
+routes.post('/signup', createUser);
 
 // routes.post('/signin', );
 
