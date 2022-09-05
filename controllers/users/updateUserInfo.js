@@ -1,5 +1,9 @@
 const { User } = require('../../models/user');
-const { NotFoundError, ValidationError, ConflictError } = require('../../errors');
+const {
+  NotFoundError,
+  ValidationError,
+  ConflictError,
+} = require('../../errors');
 
 async function updateUserInfo(req, res, next) {
   try {
