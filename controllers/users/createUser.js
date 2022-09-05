@@ -21,7 +21,7 @@ async function createUser(req, res, next) {
     res.status(201).send(user);
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
-      next(new ValidationError(`Неверные данные в ${err.path ?? 'запросе'}`));
+      next(new ValidationError('Неверные данные в запросе'));
       return;
     }
     if (err.code === 11000) {
