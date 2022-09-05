@@ -5,7 +5,7 @@ const { movies } = require('./movies');
 const { users } = require('./users');
 const { NotFoundError } = require('../errors');
 const { auth } = require('../middlewares/auth');
-const { createUser } = require('../controllers/users');
+const { createUser, login } = require('../controllers/users');
 
 const routes = express.Router();
 
@@ -13,7 +13,7 @@ routes.all('*', express.json());
 
 routes.post('/signup', createUser);
 
-// routes.post('/signin', );
+routes.post('/signin', login);
 
 routes.use('/users', auth, users);
 
