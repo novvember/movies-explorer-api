@@ -1,3 +1,4 @@
 const { getMovies } = require('./getMovies');
+const { saveMovie } = require('./saveMovie');
 
-module.exports = { getMovies };
+module.exports = { getMovies, saveMovie };
