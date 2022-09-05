@@ -1,7 +1,9 @@
 const express = require('express');
+// const { celebrate, Joi } = require('celebrate');
+
 const { movies } = require('./movies');
 const { users } = require('./users');
-// const { celebrate, Joi } = require('celebrate');
+const { NotFoundError } = require('../errors');
 
 const routes = express.Router();
 
@@ -15,6 +17,8 @@ routes.use('/users', users);
 
 routes.use('/movies', movies);
 
-// routes.all('*')
+routes.all('*', (req, res, next) => {
+  next(new NotFoundError('Неверный адрес запроса'));
+});
 
 module.exports = { routes };
