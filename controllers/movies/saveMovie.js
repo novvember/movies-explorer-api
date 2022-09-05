@@ -1,5 +1,5 @@
 const { Movie } = require('../../models/movie');
-const { ValidationError } = require('../../errors');
+const { ValidationError, ConflictError } = require('../../errors');
 
 async function saveMovie(req, res, next) {
   try {
@@ -39,6 +39,10 @@ async function saveMovie(req, res, next) {
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
       next(new ValidationError('Неверные данные в запросе'));
+      return;
+    }
+    if (err.code === 11000) {
+      next(new ConflictError('Фильм с таким id уже существует'));
       return;
     }
 
