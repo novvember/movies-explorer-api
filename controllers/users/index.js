@@ -1,3 +1,4 @@
 const getUserInfo = require('./getUserInfo');
+const updateUserInfo = require('./updateUserInfo');
 
-module.exports = { getUserInfo };
+module.exports = { getUserInfo, updateUserInfo };
