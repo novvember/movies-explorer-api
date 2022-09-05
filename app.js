@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const { routes } = require('./routes');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { limiter } = require('./middlewares/limiter');
 
 // params
 const {
@@ -30,6 +31,7 @@ mongoose
   });
 
 // middlewares
+app.use(limiter);
 app.use(requestLogger);
 app.use(helmet());
 app.use(routes);
