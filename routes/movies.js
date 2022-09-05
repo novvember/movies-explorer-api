@@ -10,6 +10,6 @@ const movies = express.Router();
 
 movies.get('/', getMovies);
 movies.post('/', saveMovieValidator, saveMovie);
-movies.delete('/:movieId', deleteMovieValidator, deleteMovie);
+movies.delete('/:id', deleteMovieValidator, deleteMovie);
 
 module.exports = { movies };

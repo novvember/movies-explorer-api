@@ -6,9 +6,9 @@ const { handleMongooseError } = require('../../utils/handleMongooseError');
 
 async function deleteMovie(req, res, next) {
   try {
-    const { movieId } = req.params;
+    const { id } = req.params;
 
-    const movie = await Movie.findById(movieId).populate('owner');
+    const movie = await Movie.findById(id).populate('owner');
 
     if (!movie) {
       throw new NotFoundError('Фильм не найден');
@@ -21,7 +21,7 @@ async function deleteMovie(req, res, next) {
       throw new ForbiddenError('Удалить фильм может только владелец');
     }
 
-    await Movie.findByIdAndRemove(movieId);
+    await Movie.findByIdAndRemove(id);
 
     res.send(movie);
   } catch (err) {
