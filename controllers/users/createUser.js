@@ -1,8 +1,9 @@
 const bcrypt = require('bcryptjs');
+
 const { User } = require('../../models/user');
 const { ConflictError, ValidationError } = require('../../errors');
 
-const SALT_LENGTH = 10;
+const { SALT_LENGTH = 10 } = process.env;
 
 async function createUser(req, res, next) {
   try {
