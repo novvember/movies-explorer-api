@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 
 // modules
 const { routes } = require('./routes');
@@ -30,6 +31,7 @@ mongoose
 
 // middlewares
 app.use(requestLogger);
+app.use(helmet());
 app.use(routes);
 
 // error handlers
