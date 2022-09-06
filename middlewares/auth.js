@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
+
 const { UnauthorizedError } = require('../errors');
+const constants = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -9,7 +11,7 @@ function auth(req, res, next) {
 
     if (!authorization || !authorization.startsWith('Bearer ')) {
       throw new UnauthorizedError(
-        'Для обработки запроса необходима авторизация',
+        constants.unauthorizedError.MESSAGE_PROTECTED,
       );
     }
 
@@ -23,7 +25,7 @@ function auth(req, res, next) {
       );
     } catch (err) {
       throw new UnauthorizedError(
-        'Для обработки запроса необходима авторизация',
+        constants.unauthorizedError.MESSAGE_PROTECTED,
       );
     }
 

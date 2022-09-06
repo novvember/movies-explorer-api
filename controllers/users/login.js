@@ -5,6 +5,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const { User } = require('../../models/user');
 const { UnauthorizedError } = require('../../errors');
+const constants = require('../../utils/constants');
 
 async function login(req, res, next) {
   try {
@@ -13,13 +14,13 @@ async function login(req, res, next) {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-      throw new UnauthorizedError('Неверные данные для входа');
+      throw new UnauthorizedError(constants.unauthorizedError.MESSAGE_LOGIN);
     }
 
     const hasRightPassword = await bcrypt.compare(password, user.password);
 
     if (!hasRightPassword) {
-      throw new UnauthorizedError('Неверные данные для входа');
+      throw new UnauthorizedError(constants.unauthorizedError.MESSAGE_LOGIN);
     }
 
     const token = jwt.sign(

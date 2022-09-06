@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { ValidationError } = require('../errors');
+const constants = require('./constants');
 
 function handleMongooseError(err) {
   if (
@@ -7,7 +8,9 @@ function handleMongooseError(err) {
     || err instanceof mongoose.Error.CastError
   ) {
     const fieldName = Object.keys(err.errors)[0];
-    return new ValidationError(`Неверные данные в поле '${fieldName}'`);
+    return new ValidationError(
+      `${constants.validationError.MESSAGE_DETAILED} ${fieldName}`,
+    );
   }
 
   return err;

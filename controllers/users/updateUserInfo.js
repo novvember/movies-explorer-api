@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { User } = require('../../models/user');
 const { NotFoundError, ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
+const constants = require('../../utils/constants');
 
 async function updateUserInfo(req, res, next) {
   try {
@@ -15,13 +16,13 @@ async function updateUserInfo(req, res, next) {
     );
 
     if (!user) {
-      throw new NotFoundError('Пользователь не найден');
+      throw new NotFoundError(constants.notFoundError.MESSAGE_USER);
     }
 
     res.send(user);
   } catch (err) {
     if (err.name === 'MongoServerError' && err.code === 11000) {
-      next(new ConflictError('Пользователь с таким email уже существует'));
+      next(new ConflictError(constants.conflictError.MESSAGE_USER));
       return;
     }
 

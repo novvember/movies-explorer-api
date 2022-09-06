@@ -3,6 +3,7 @@ const { mongoose } = require('mongoose');
 const { Movie } = require('../../models/movie');
 const { ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
+const constants = require('../../utils/constants');
 
 async function saveMovie(req, res, next) {
   try {
@@ -41,7 +42,7 @@ async function saveMovie(req, res, next) {
     res.status(201).send(movie);
   } catch (err) {
     if (err.name === 'MongoServerError' && err.code === 11000) {
-      next(new ConflictError('Фильм с таким id уже существует'));
+      next(new ConflictError(constants.conflictError.MESSAGE_MOVIE));
       return;
     }
 

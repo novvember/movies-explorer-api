@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { User } = require('../../models/user');
 const { ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
+const constants = require('../../utils/constants');
 
 const { SALT_LENGTH = 10 } = process.env;
 
@@ -23,7 +24,7 @@ async function createUser(req, res, next) {
     res.status(201).send(user);
   } catch (err) {
     if (err.name === 'MongoServerError' && err.code === 11000) {
-      next(new ConflictError('Пользователь с таким email уже существует'));
+      next(new ConflictError(constants.conflictError.MESSAGE_USER));
       return;
     }
 
