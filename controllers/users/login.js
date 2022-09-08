@@ -1,7 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const configDefault = require('../../utils/configDefault');
+
+const { JWT_SECRET = configDefault.JWT_SECRET } = process.env;
 
 const { User } = require('../../models/user');
 const { UnauthorizedError } = require('../../errors');
@@ -27,7 +29,7 @@ async function login(req, res, next) {
       {
         _id: user._id,
       },
-      NODE_ENV === 'production' ? JWT_SECRET : 'secret',
+      JWT_SECRET,
       {
         expiresIn: '7d',
       },

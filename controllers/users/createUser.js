@@ -5,8 +5,9 @@ const { User } = require('../../models/user');
 const { ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
 const constants = require('../../utils/constants');
+const configDefault = require('../../utils/configDefault');
 
-const { SALT_LENGTH = 10 } = process.env;
+const { SALT_LENGTH = configDefault.SALT_LENGTH } = process.env;
 
 async function createUser(req, res, next) {
   try {

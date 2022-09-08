@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const { UnauthorizedError } = require('../errors');
 const constants = require('../utils/constants');
+const configDefault = require('../utils/configDefault');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET = configDefault.JWT_SECRET } = process.env;
 
 function auth(req, res, next) {
   try {
@@ -19,10 +20,7 @@ function auth(req, res, next) {
     let payload;
 
     try {
-      payload = jwt.verify(
-        token,
-        NODE_ENV === 'production' ? JWT_SECRET : 'secret',
-      );
+      payload = jwt.verify(token, JWT_SECRET);
     } catch (err) {
       throw new UnauthorizedError(
         constants.unauthorizedError.MESSAGE_PROTECTED,
