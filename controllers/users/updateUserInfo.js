@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { User } = require('../../models/user');
 const { NotFoundError, ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
-const constants = require('../../utils/constants');
+const { ERROR_MESSAGES } = require('../../utils/constants');
 
 async function updateUserInfo(req, res, next) {
   try {
@@ -16,13 +16,13 @@ async function updateUserInfo(req, res, next) {
     );
 
     if (!user) {
-      throw new NotFoundError(constants.notFoundError.MESSAGE_USER);
+      throw new NotFoundError(ERROR_MESSAGES.USER_NOT_FOUND);
     }
 
     res.send(user);
   } catch (err) {
     if (err.code === 11000) {
-      next(new ConflictError(constants.conflictError.MESSAGE_USER));
+      next(new ConflictError(ERROR_MESSAGES.USER_CONFLICT));
       return;
     }
 

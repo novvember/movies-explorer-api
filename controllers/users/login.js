@@ -7,7 +7,7 @@ const { JWT_SECRET = configDefault.JWT_SECRET } = process.env;
 
 const { User } = require('../../models/user');
 const { UnauthorizedError } = require('../../errors');
-const constants = require('../../utils/constants');
+const { ERROR_MESSAGES } = require('../../utils/constants');
 
 async function login(req, res, next) {
   try {
@@ -16,13 +16,13 @@ async function login(req, res, next) {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-      throw new UnauthorizedError(constants.unauthorizedError.MESSAGE_LOGIN);
+      throw new UnauthorizedError(ERROR_MESSAGES.WRONG_CREDENTIALS);
     }
 
     const hasRightPassword = await bcrypt.compare(password, user.password);
 
     if (!hasRightPassword) {
-      throw new UnauthorizedError(constants.unauthorizedError.MESSAGE_LOGIN);
+      throw new UnauthorizedError(ERROR_MESSAGES.WRONG_CREDENTIALS);
     }
 
     const token = jwt.sign(

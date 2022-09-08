@@ -1,42 +1,26 @@
-const conflictError = {
-  STATUS_CODE: 409,
-  MESSAGE_USER: 'Пользователь с таким email уже существует',
-  MESSAGE_MOVIE: 'Фильм с таким id уже существует',
+const STATUS_CODES = {
+  CONFLICT: 409,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+  INTERNAL_SERVER_ERROR: 500,
 };
 
-const forbiddenError = {
-  STATUS_CODE: 403,
-  MESSAGE: 'Нет прав для выполнения действия',
-};
-
-const notFoundError = {
-  STATUS_CODE: 404,
-  MESSAGE_USER: 'Пользователь не найден',
-  MESSAGE_MOVIE: 'Фильм не найден',
-  MESSAGE_PAGE: 'Неверный адрес запроса',
-};
-
-const unauthorizedError = {
-  STATUS_CODE: 401,
-  MESSAGE_LOGIN: 'Неверные данные для входа',
-  MESSAGE_PROTECTED: 'Для обработки запроса необходима авторизация',
-};
-
-const validationError = {
-  STATUS_CODE: 400,
-  MESSAGE_DETAILED: 'Неверные данные в поле',
-};
-
-const unknownError = {
-  STATUS_CODE: 500,
-  MESSAGE: 'Что-то пошло не так',
+const ERROR_MESSAGES = {
+  USER_CONFLICT: 'Пользователь с таким email уже существует',
+  MOVIE_CONFLICT: 'Фильм с таким id уже существует',
+  FORBIDDEN: 'Нет прав для выполнения действия',
+  USER_NOT_FOUND: 'Пользователь не найден',
+  MOVIE_NOT_FOUND: 'Фильм не найден',
+  PAGE_NOT_FOUND: 'Неверный адрес запроса',
+  WRONG_CREDENTIALS: 'Неверные данные для входа',
+  UNAUTHORIZED: 'Для обработки запроса необходима авторизация',
+  WRONG_DATA_AT_FIELD: 'Неверные данные в поле',
+  UNKNOWN_ERROR: 'Что-то пошло не так',
 };
 
 module.exports = {
-  conflictError,
-  forbiddenError,
-  notFoundError,
-  unauthorizedError,
-  validationError,
-  unknownError,
+  STATUS_CODES,
+  ERROR_MESSAGES,
 };

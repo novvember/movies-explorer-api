@@ -1,6 +1,6 @@
 const { User } = require('../../models/user');
 const { NotFoundError } = require('../../errors');
-const constants = require('../../utils/constants');
+const { ERROR_MESSAGES } = require('../../utils/constants');
 
 async function getUserInfo(req, res, next) {
   try {
@@ -8,7 +8,7 @@ async function getUserInfo(req, res, next) {
     const user = await User.findById(userId);
 
     if (!user) {
-      throw new NotFoundError(constants.notFoundError.MESSAGE_USER);
+      throw new NotFoundError(ERROR_MESSAGES.USER_NOT_FOUND);
     }
 
     res.send(user);

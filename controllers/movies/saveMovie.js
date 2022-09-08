@@ -3,7 +3,7 @@ const { mongoose } = require('mongoose');
 const { Movie } = require('../../models/movie');
 const { ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
-const constants = require('../../utils/constants');
+const { ERROR_MESSAGES } = require('../../utils/constants');
 
 async function saveMovie(req, res, next) {
   try {
@@ -42,7 +42,7 @@ async function saveMovie(req, res, next) {
     res.status(201).send(movie);
   } catch (err) {
     if (err.code === 11000) {
-      next(new ConflictError(constants.conflictError.MESSAGE_MOVIE));
+      next(new ConflictError(ERROR_MESSAGES.MOVIE_CONFLICT));
       return;
     }
 

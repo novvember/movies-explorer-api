@@ -6,7 +6,7 @@ const { NotFoundError } = require('../errors');
 const { auth } = require('../middlewares/auth');
 const { createUser, login } = require('../controllers/users');
 const { createUserValidator, loginValidator } = require('../utils/validators');
-const constants = require('../utils/constants');
+const { ERROR_MESSAGES } = require('../utils/constants');
 
 const routes = express.Router();
 
@@ -21,7 +21,7 @@ routes.use('/users', users);
 routes.use('/movies', movies);
 
 routes.all('*', (req, res, next) => {
-  next(new NotFoundError(constants.notFoundError.MESSAGE_PAGE));
+  next(new NotFoundError(ERROR_MESSAGES.PAGE_NOT_FOUND));
 });
 
 module.exports = { routes };

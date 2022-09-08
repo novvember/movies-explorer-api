@@ -1,9 +1,9 @@
-const constants = require('../utils/constants');
+const { STATUS_CODES } = require('../utils/constants');
 
 class UnauthorizedError extends Error {
   constructor(message) {
     super(message);
-    this.statusCode = constants.unauthorizedError.STATUS_CODE;
+    this.statusCode = STATUS_CODES.UNAUTHORIZED;
   }
 }
 

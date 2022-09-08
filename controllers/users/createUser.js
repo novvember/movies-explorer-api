@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { User } = require('../../models/user');
 const { ConflictError } = require('../../errors');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
-const constants = require('../../utils/constants');
+const { ERROR_MESSAGES } = require('../../utils/constants');
 const configDefault = require('../../utils/configDefault');
 
 const { SALT_LENGTH = configDefault.SALT_LENGTH } = process.env;
@@ -25,7 +25,7 @@ async function createUser(req, res, next) {
     res.status(201).send(user);
   } catch (err) {
     if (err.code === 11000) {
-      next(new ConflictError(constants.conflictError.MESSAGE_USER));
+      next(new ConflictError(ERROR_MESSAGES.USER_CONFLICT));
       return;
     }
 
