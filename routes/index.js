@@ -15,8 +15,10 @@ routes.all('*', express.json());
 routes.post('/signup', createUserValidator, createUser);
 routes.post('/signin', loginValidator, login);
 
-routes.use('/users', auth, users);
-routes.use('/movies', auth, movies);
+routes.all('*', auth);
+
+routes.use('/users', users);
+routes.use('/movies', movies);
 
 routes.all('*', (req, res, next) => {
   next(new NotFoundError(constants.notFoundError.MESSAGE_PAGE));

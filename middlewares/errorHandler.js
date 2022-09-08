@@ -1,5 +1,6 @@
 const constants = require('../utils/constants');
 
+// eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   const { statusCode = constants.unknownError.STATUS_CODE } = err;
   let { message } = err;
@@ -9,8 +10,6 @@ function errorHandler(err, req, res, next) {
   }
 
   res.status(statusCode).send({ message });
-
-  next(err); // needs to avoid eslint error, will be never executed
 }
 
 module.exports = { errorHandler };
