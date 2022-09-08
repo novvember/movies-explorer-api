@@ -23,7 +23,7 @@ async function createUser(req, res, next) {
     delete user.password;
     res.status(201).send(user);
   } catch (err) {
-    if (err.name === 'MongoServerError' && err.code === 11000) {
+    if (err.code === 11000) {
       next(new ConflictError(constants.conflictError.MESSAGE_USER));
       return;
     }

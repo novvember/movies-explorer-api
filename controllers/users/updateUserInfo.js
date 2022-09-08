@@ -21,7 +21,7 @@ async function updateUserInfo(req, res, next) {
 
     res.send(user);
   } catch (err) {
-    if (err.name === 'MongoServerError' && err.code === 11000) {
+    if (err.code === 11000) {
       next(new ConflictError(constants.conflictError.MESSAGE_USER));
       return;
     }
