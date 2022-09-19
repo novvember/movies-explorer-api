@@ -55,7 +55,6 @@ const movieSchema = new mongoose.Schema(
     movieId: {
       type: Number,
       required: true,
-      unique: true,
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -67,6 +66,8 @@ const movieSchema = new mongoose.Schema(
     versionKey: false,
   },
 );
+
+movieSchema.index({ owner: 1, movieId: 1 }, { unique: true });
 
 const Movie = mongoose.model('movie', movieSchema);
 
