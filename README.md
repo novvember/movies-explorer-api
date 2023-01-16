@@ -16,7 +16,9 @@
 
 
 ## Демо
-API-сервер доступен по адресу: `https://api.movies.novvember.nomoredomains.sbs`
+API-сервер доступен по адресу: `https://movies-explorer-api.onrender.com`
+
+(Ранее был задеплоен на отдельный виртаульный сервер. Сейчас: часть с Node.js - на render.com, база данных - на Mongo Atlas)
 
 
 ## Доступ к рабочему серверу
